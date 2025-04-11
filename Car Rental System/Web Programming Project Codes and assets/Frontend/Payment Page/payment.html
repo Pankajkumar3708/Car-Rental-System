@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffffff, #ffffff);
+            background-image: url('logo_icon.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #ff6699;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ff3366;
+        }
+        .summary {
+            margin-top: 15px;
+            font-size: 14px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Vehicle Rental Payment</h2>
+
+    <!-- Auto-filled from URL parameters -->
+    <label>Car Name:</label>
+    <input type="text" id="carName" readonly>
+
+    <label>Car Price Per Day (Rs.):</label>
+    <input type="number" id="pricePerDay" readonly>
+
+    <label>Pickup Date:</label>
+    <input type="date" id="pickupDate" required>
+
+    <label>Estimated No. of Days:</label>
+    <input type="number" id="days" placeholder="Enter No. of Days" required oninput="calculatePrice()">
+
+    <label>Payment Mode:</label>
+    <select id="paymentMode" onchange="calculatePrice()">
+        <option value="cash">Cash (15% Advance)</option>
+        <option value="credit">Credit Card (30% Advance)</option>
+        <option value="debit">Debit Card (30% Advance)</option>
+        <option value="upi">UPI (30% Advance)</option>
+        <option value="netbanking">Net Banking (30% Advance)</option>
+    </select>
+
+    <div class="summary">
+        <p><strong>Total Estimated Price: </strong>₹<span id="totalPrice">0</span></p>
+        <p><strong>Advance Payment: </strong>₹<span id="advancePayment">0</span></p>
+        <p><strong>Remaining Payable: </strong>₹<span id="payableAmount">0</span></p>
+    </div>
+
+    <button onclick="proceedToPay()">Proceed to Pay</button>
+</div>
+
+<script>
+    // Function to read URL parameters
+    function getQueryParams() {
+        let params = new URLSearchParams(window.location.search);
+        return {
+            name: params.get("name") || "Unknown Car",
+            price: parseFloat(params.get("price")) || 0
+        };
+    }
+
+    // Auto-fill car details
+    let carDetails = getQueryParams();
+    document.getElementById("carName").value = carDetails.name;
+    document.getElementById("pricePerDay").value = carDetails.price;
+
+    function calculatePrice() {
+        let pricePerDay = carDetails.price;
+        let days = parseInt(document.getElementById('days').value) || 0;
+        let paymentMode = document.getElementById("paymentMode").value;
+        let pickupDate = document.getElementById("pickupDate").value;
+
+        // Validate Pickup Date (must be today or future)
+        let today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+        if (pickupDate < today) {
+            alert("Pickup date cannot be in the past! Please select today's date or a future date.");
+            document.getElementById("pickupDate").value = today; // Reset to today
+            return;
+        }
+
+        let totalPrice = pricePerDay * days;
+        let advancePayment = (paymentMode === "cash") ? totalPrice * 0.15 : totalPrice * 0.30;
+        let payableAmount = totalPrice - advancePayment;
+
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        document.getElementById('advancePayment').textContent = advancePayment.toFixed(2);
+        document.getElementById('payableAmount').textContent = payableAmount.toFixed(2);
+    }
+
+    // Set today's date as minimum value for pickup date
+    document.getElementById("pickupDate").setAttribute("min", new Date().toISOString().split("T")[0]);
+
+    // Proceed to payment function (for future integration)
+    function proceedToPay() {
+        alert("Redirecting to Payment Gateway...");
+        // Here, you can add logic to redirect to a payment gateway.
+    }
+</script>
+
+</body>
+</html>

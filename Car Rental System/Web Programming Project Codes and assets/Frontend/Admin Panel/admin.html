@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Vehicle Rental System</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Admin Panel</h2>
+            <ul>
+                <li><button onclick="showUsers()">Users</button></li>
+                <li><button onclick="showCars()">Cars</button></li>
+                <li><button onclick="showRents()">Rented Cars</button></li>
+                <li><button onclick="showDriversWithSalary()">Drivers</button></li>
+                <li><button onclick="showPopularDeals()">Popular Deals</button></li>
+                <li><button onclick="showReviews()">Reviews</button></li>
+                <li><button onclick="showBookings()">Bookings</button></li>
+                <li><button onclick="showPayments()">Payments</button></li>
+                <li><button onclick="showDamageReports()">Damage Reports</button></li>
+                <li><button onclick="showRentalAgreements()">Rental Agreements</button></li>
+                <li><button onclick="logout()">Logout</button></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 id="section-title">Dashboard <br> <br> Welcome to the Admin Panel</h1>
+            <table id="dataTable">
+                <thead>
+                    <tr id="table-header">
+                        <!-- Dynamic headers will be inserted here -->
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/Web Project/Backend/Routes/admin.js"></script>
+</body>
+</html>

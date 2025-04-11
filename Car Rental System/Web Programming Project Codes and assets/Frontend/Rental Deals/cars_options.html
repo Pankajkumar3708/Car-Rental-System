@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rentalApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Deals</title>
+    <link rel="stylesheet" href="cars_page.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-controller="CarController">
+
+    <section class="rental-deals">
+        <div class="header">
+            <span class="badge">Popular Rental Deals</span>
+            <h2>Most Popular Car Rental Deals</h2>
+        </div>
+
+        <div class="car-list">
+            <div class="car-card" ng-repeat="car in cars | limitTo: visibleCars">
+                <img ng-src="{{car.image}}" alt="{{car.vehicle_name}}">
+                <h3>{{car.vehicle_name}}</h3>
+                <div class="rating">
+                    <span>⭐ {{car.rating}} ({{car.reviews}} reviews)</span>
+                </div>
+                <div class="details">
+                    <span>🚗 {{car.passengers}} Passengers</span>
+                    <span>⚙️ {{car.transmission}}</span>
+                    <span>❄️ Air Conditioning</span>
+                    <span>🚪 {{car.doors}} Doors</span>
+                </div><br>
+                <hr>
+                <p class="price">Price: <strong>Rs. {{car.price_per_day}}</strong>/day</p>
+                <button class="rent-btn">
+                    <a ng-href="/Web Project/Frontend/Payment Page/payment.html?name={{car.vehicle_name}}&price={{car.price_per_day}}">
+                        Rent Now →
+                    </a>
+                </button>
+                
+            </div>
+        </div>
+
+        <button class="show-all" ng-show="visibleCars < cars.length" ng-click="showAll()">Show all vehicles →</button>
+
+    </section>
+
+    <script src="/Web Project/Backend/Routes/deals.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Rent Cars</title>
+    <link rel="stylesheet" href="contact.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p> <strong>Company Name:</strong> Rent Cars</p>
+            <p> <strong>Phone:</strong> +91 80910 84133</p>
+            <p> <strong>Email:</strong> support@rentcars.com</p>
+            <p> <strong>Address:</strong> Sector 23, Chandigarh, India</p>
+        </div>
+
+        <div class="contact-form">
+            <h3>Get in Touch</h3>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <input type="text" id="subject" placeholder="Subject" required>
+                <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+
+                <div class="suggestion-box">
+                    <label>
+                        <input type="checkbox" id="suggestionToggle"> I have a suggestion
+                    </label>
+                    <textarea id="suggestion" rows="4" placeholder="Enter your suggestion"></textarea>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Thank you! Your message has been sent.");
+        });
+
+        document.getElementById("suggestionToggle").addEventListener("change", function() {
+            const suggestionField = document.getElementById("suggestion");
+            suggestionField.style.display = this.checked ? "block" : "none";
+        });
+
+        document.getElementById("suggestionToggle").addEventListener("change", function() {
+    document.getElementById("suggestion").style.display = this.checked ? "block" : "none";
+});
+
+    </script>
+</body>
+</html>

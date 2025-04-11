@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    background-image: url('logo_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+}
+
+/* Main Container */
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+/* "HOW IT WORK" Section */
+.how-it-work {
+    background-color: #6baef6;
+    color: white;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+.how-it-work:hover {
+    background-color: #007bff;
+}
+
+/* Steps Section */
+.steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-top: 90px;
+    flex-wrap: wrap;
+}
+
+.step {
+    text-align: center;
+    width: 250px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+/* Step Icons */
+.icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+/* Step Headings */
+.step h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Step Descriptions */
+.step p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Footer Section for Car Logos */
+footer {
+    margin-top: auto;
+    padding: 10px 0; /* Increased padding for a bigger footer */
+    background-color: #f8f8f8;
+    height: 50px; /* Increased height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensures smooth animation */
+    position: relative;
+}
+
+/* Car Logos Wrapper */
+.car-logos-container {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Car Logos Image */
+#car_logos {
+    width: auto;
+    height: 47px;
+    display: inline-block;
+    animation: rollLogos 10s linear infinite; /* Smooth rolling effect */
+}
+
+/* Keyframe Animation for Rolling Effect */
+@keyframes rollLogos {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .steps {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .step {
+        width: 90%;
+    }
+
+    footer {
+        height: 20px; /* Slightly smaller height for mobile */
+        padding: 30px 0;
+    }
+
+    #car_logos {
+        height: 40px; /* Adjusted for smaller screens */
+    }
+}

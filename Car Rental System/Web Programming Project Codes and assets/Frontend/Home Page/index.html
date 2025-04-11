@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rentalApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Cars</title>
+    <link rel="stylesheet" href="index_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="MainController">
+
+    <header>
+        <div class="logo">
+            <img src="LOGO.png" alt="Company Logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/Web Project/Frontend/Rental Deals/cars_options.html">Rental Deals</a></li>
+                <li><a href="/Web Project/Frontend/How it works/works_page.html">How it Works</a></li>
+                <li><a href="/Web Project/Frontend/why choose us/choose_us.html">Why Choose Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="auth-buttons" ng-if="!isLoggedIn">
+            <a href="/Web Project/Frontend/sign-in and sign-up/sign_in.html" class="sign-in">Sign in</a>
+            <a href="/Web Project/Frontend/sign-in and sign-up/sign_up.html" class="sign-up">Sign up</a>
+        </div>
+
+        <div class="user-info" ng-if="isLoggedIn">
+            <span>Welcome, {{ user.name }} ({{ user.email }})</span>
+            <button ng-click="logout()">Logout</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Find, book and <br> rent a car <span id="hero1">Easily</span></h1><br>
+        <p>Get a car wherever and whenever you <br> need it with your iOS and Android device.</p>
+    </section>
+
+    <footer class="footer">
+        <ul class="foot-links">
+            <li><a href="/Web Project/Frontend/Review Page/review.html" class="footer1">Reviews</a></li>
+            <li><a href="/Web Project/Frontend/Pricing Plans/plans.html" class="footer1">Popular Deals</a></li>
+            <li><a href="/Web Project/Frontend/Contact us/contact_us.html" class="footer1">Contact us</a></li>
+            <li><a href="/Web Project/Frontend/Need Driver/driver.html" id="search1" class="footer1">Need a Driver</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        var app = angular.module("rentalApp", []);
+
+        app.controller("MainController", function ($scope, $window) {
+            var storedUser = localStorage.getItem("user");
+            $scope.isLoggedIn = !!storedUser;
+
+            if ($scope.isLoggedIn) {
+                $scope.user = JSON.parse(storedUser);
+            }
+
+            $scope.logout = function () {
+                localStorage.removeItem("user");
+                $scope.isLoggedIn = false;
+                $window.location.reload();
+            };
+        });
+    </script>
+
+</body>
+
+</html>

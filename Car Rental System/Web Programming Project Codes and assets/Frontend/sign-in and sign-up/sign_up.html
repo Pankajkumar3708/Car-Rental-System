@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rentalApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENT CARS - Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="SignupController">
+    <div class="container">
+        <form class="signup-form" ng-submit="registerUser()">
+            <h2>Sign Up</h2>
+
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" ng-model="user.name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" ng-model="user.phone" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" ng-model="user.email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" ng-model="user.password" placeholder="Create a password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" ng-model="user.confirmPassword" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="license">Driver’s License Number</label>
+                <input type="text" id="license" ng-model="user.license_no" placeholder="Enter your license number" required>
+            </div>
+
+            <div class="input-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" ng-model="user.dob" required>
+            </div>
+
+            <div class="input-group">
+                <label for="address">Address</label>
+                <textarea id="address" ng-model="user.address" placeholder="Enter your address" required></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+            </div>
+
+            <button type="submit">Sign Up</button>
+            <p class="signin-link">Already have an account? <a href="sign_in.html">Sign In</a></p>
+        </form>
+    </div>
+
+    <script src="/Web Project/Backend/Routes/signup.js"></script>
+</body>
+</html>

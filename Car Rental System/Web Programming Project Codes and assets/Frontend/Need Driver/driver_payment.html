@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-top: 5px solid #007bff;
+        }
+
+        h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .details p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input {
+            width: 80px;
+            padding: 5px;
+            text-align: center;
+            font-size: 16px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #0056b3;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Booking ID Field */
+        .booking-section {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .booking-section input {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Payment Details</h2>
+    <div class="details">
+        <p><strong>Driver Name:</strong> <span id="driverName"></span></p>
+        <p><strong>Cost Per Day:</strong> ₹<span id="costPerDay"></span></p>
+        <p><strong>Number of Days:</strong> 
+            <input type="number" id="numDays" min="1" max="30" value="1" oninput="updateTotal()">
+        </p>
+        <p><strong>Total Amount:</strong> ₹<span id="totalAmount"></span></p>
+    </div>
+
+    <div class="booking-section">
+        <p><strong>Enter Your Booking ID:</strong></p>
+        <input type="text" id="bookingId" placeholder="Enter your rented car ID">
+        <p class="error" id="errorMessage"></p>
+    </div>
+
+    <button onclick="processPayment()">Proceed to Payment</button>
+</div>
+
+<script>
+    function getQueryParams() {
+        let params = new URLSearchParams(window.location.search);
+        return {
+            name: params.get("name"),
+            price: parseInt(params.get("price"), 10)
+        };
+    }
+
+    function updateTotal() {
+        let { price } = getQueryParams();
+        let days = parseInt(document.getElementById("numDays").value, 10);
+        let totalAmount = price * days;
+
+        document.getElementById("totalAmount").textContent = totalAmount;
+    }
+
+    function displayPaymentDetails() {
+        let { name, price } = getQueryParams();
+
+        document.getElementById("driverName").textContent = name;
+        document.getElementById("costPerDay").textContent = price;
+
+        updateTotal(); // Calculate initial total amount
+    }
+
+    function processPayment() {
+        let total = document.getElementById("totalAmount").textContent;
+        let bookingId = document.getElementById("bookingId").value.trim();
+        let errorMessage = document.getElementById("errorMessage");
+
+        if (bookingId === "") {
+            errorMessage.textContent = "❌ Please enter a valid booking ID!";
+            return;
+        } else {
+            errorMessage.textContent = "";
+        }
+
+        alert("✅ Payment processing for ₹" + total + " with Booking ID: " + bookingId);
+        // Add real payment integration here
+    }
+
+    window.onload = displayPaymentDetails;
+</script>
+
+</body>
+</html>

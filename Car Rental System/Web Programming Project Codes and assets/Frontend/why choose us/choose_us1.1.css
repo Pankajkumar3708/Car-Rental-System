@@ -1,0 +1,125 @@
+:root {
+    --image-visible-width: 140%; /* Adjust the visible width of the image */
+}
+
+/* General Styling */
+body {
+    font-family:'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    background-image: url('why_us_car.png');
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Adjust the background position */
+body {
+    background-position: calc(100% - var(--image-visible-width)) center;
+}
+
+/* Layout Container */
+.container {
+    display: flex;
+    max-width: 1300px;
+    margin-right: 200px;
+    text-align: right;
+    width: 90%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Features Section */
+.features {
+    flex: 1;
+    text-align: left;
+    max-width: 500px;
+}
+
+/* Button Styling */
+.btn-highlight {
+    background-color: #dbe5ff;
+    border: none;
+    color: #4568dc;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Headings */
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* Feature Items */
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Feature Icons */
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eef4ff;
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.icon i {
+    color: #4568dc;
+    font-size: 24px;
+}
+
+/* Feature Text */
+.text h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.text p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    body {
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .features {
+        text-align: center;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        align-items: center;
+    }
+}

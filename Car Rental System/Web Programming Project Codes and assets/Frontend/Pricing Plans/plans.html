@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans</title>
+    <style>
+        body {
+            font-family:'Times New Roman', Times, serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #66b5ff;
+            color: white;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Select a Pricing Plan</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Plan ID</th>
+                <th>Plan Name</th>
+                <th>Vehicle Type</th>
+                <th>Price Per Hour (Rs.)</th>
+                <th>Price Per Day (Rs.)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="pricingTable">
+            <!-- Data from API will be inserted here -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Fetch pricing plans from the backend
+    fetch('http://localhost:5000/api/pricing-plans')
+    .then(response => response.json())
+    .then(data => {
+        console.log("Fetched data:", data); // Debugging Log
+        let tableBody = document.getElementById('pricingTable');
+        tableBody.innerHTML = '';
+
+        data.forEach(plan => {
+            let row = `
+                <tr>
+                    <td>${plan.plan_id}</td>
+                    <td>${plan.plan_name}</td>
+                    <td>${plan.vehicle_type}</td>
+                    <td>₹${plan.price_per_hour.toFixed(2)}</td>
+                    <td>₹${plan.price_per_day.toFixed(2)}</td>
+                    <td><button onclick="selectPlan('${plan.plan_name}', ${plan.price_per_day})">Select</button></td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    })
+    .catch(error => console.error('Error fetching pricing plans:', error));
+
+
+    // Redirect to payment page with selected plan details
+    function selectPlan(name, price) {
+    window.location.href = `../Payment Page/payment.html?name=${encodeURIComponent(name)}&price=${price}`;
+}
+
+</script>
+
+</body>
+</html>
